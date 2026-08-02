@@ -4,6 +4,17 @@
 
 Built for legal firms and malpractice-insurance workflows, where *"the model said it"* is not a defense.
 
+## Where this fits: the two layers of agent governance
+
+Agent security is splitting into two complementary layers, and serious deployments need both:
+
+| Layer | Governs | Example tooling |
+|---|---|---|
+| **Endpoint / action layer** | What the agent *does* — tool calls, file writes, shell commands, network access | [Numbat](https://github.com/perplexityai/numbat) (Perplexity, Apache 2.0) |
+| **Content / output layer** | What the agent *says* — advice phrasing, PII in text, mandated disclaimers, confidence | **This project** |
+
+Numbat stops an agent from `curl`-ing client files off the machine. This layer stops an agent from telling a client *"you should sue."* One without the other leaves a hole an insurer will find. FLL is designed to slot into stacks that already run an endpoint layer — findings are evidence, not verdicts; monitor first, promote to enforcement deliberately.
+
 ## Why this exists
 
 LLMs in legal/insurance contexts create three concrete liability risks:
