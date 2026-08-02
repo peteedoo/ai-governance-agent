@@ -1,0 +1,17 @@
+# Default policy set for a law firm deploying LLM assistance.
+# Rationale: combines ABA Model Rule 1.1 (competence) and 5.5 (UPL) concerns
+# with client-confidentiality obligations.
+name: legal-firm-default
+checks:
+  - check: pii
+    action: redact
+    kinds: [ssn, credit_card]
+    replacement: "[REDACTED]"
+  - check: pii
+    action: escalate
+    kinds: [email, phone]
+  - check: required_disclaimer
+    phrase: "not legal advice"
+  - check: unauthorized_practice_of_law
+  - check: min_confidence
+    threshold: 0.7

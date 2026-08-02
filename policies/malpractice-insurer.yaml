@@ -1,0 +1,15 @@
+# Policy set tuned for malpractice-insurance review workflows.
+# Anything touching claim settlement advice is hard-blocked for human review.
+name: malpractice-insurer
+checks:
+  - check: banned_topics
+    topics:
+      - "settle the claim"
+      - "admit fault"
+      - "waive coverage"
+  - check: pii
+    action: redact
+    kinds: [ssn, credit_card, phone]
+    replacement: "[REDACTED]"
+  - check: min_confidence
+    threshold: 0.8
